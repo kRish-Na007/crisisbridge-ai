@@ -95,22 +95,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Terminal Header Banner
+# Terminal Header Banner
 st.markdown("""
-<div class="terminal-card">
-<pre style="color: #00ff66; margin:0; font-size: 10px; line-height: 1.1; overflow-x: auto;">
- ██████╗██████╗ ██╗███████╗██╗███████╗██████╗ ██████╗ ██╗██████╗  ██████╗ ███████╗   █████╗ ██╗
-██╔════╝██╔══██╗██║██╔════╝██║██╔════╝██╔══██╗██╔══██╗██║██╔══██╗██╔════╝ ██╔════╝  ██╔══██╗██║
-██║     ██████╔╝██║███████╗██║███████╗██████╔╝██████╔╝██║██║  ██║██║  ███╗█████╗    ███████║██║
-██║     ██╔══██╗██║╚════██║██║╚════██║██╔══██╗██╔══██╗██║██║  ██║██║   ██║██╔══╝    ██╔══██╗██║
-╚██████╗██║  ██║██║███████║██║███████║██████╔╝██║  ██║██║██████╔╝╚██████╔╝███████╗  ██║  ██║██║
- ╚═════╝╚═╝  ╚═╝╚═╝╚══════╝╚═╝╚══════╝╚═════╝ ╚═╝  ╚═╝╚═╝╚═════╝  ╚═════╝ ╚══════╝  ╚═╝  ╚═╝╚═╝
-</pre>
-<hr style="border: 0.5px solid #00ff66; margin: 10px 0;">
-<div style="display: flex; justify-content: space-between;">
-    <span>[ STATUS: ONLINE ]</span>
-    <span>[ ENGINE: NVIDIA NEMOTRON 3.5 ]</span>
-    <span>[ WEB INTEL: TAVILY ENGINE ]</span>
-</div>
+<div class="terminal-card" style="text-align: center; padding: 20px 15px;">
+    <h1 style="color: #00ff66 !important; margin: 0; font-size: 2.8rem; letter-spacing: 5px; text-shadow: 0 0 12px #00ff66; font-family: 'Courier New', Courier, monospace;">
+        🚨 CRISISBRIDGE AI
+    </h1>
+    <div style="color: #00ff66; margin-top: 6px; font-size: 0.85rem; letter-spacing: 2px; opacity: 0.85;">
+        // REAL-TIME DISASTER TRIAGE & EMERGENCY LOGISTICS AGENT //
+    </div>
+    <hr style="border: 0.5px solid #00ff66; margin: 15px 0 10px 0;">
+    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; flex-wrap: wrap; gap: 10px;">
+        <span>[ STATUS: ONLINE ]</span>
+        <span>[ ENGINE: NVIDIA NEMOTRON 3.5 ]</span>
+        <span>[ WEB INTEL: TAVILY ENGINE ]</span>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
