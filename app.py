@@ -107,7 +107,7 @@ st.markdown("""
     <hr style="border: 0.5px solid #00ff66; margin: 15px 0 10px 0;">
     <div style="display: flex; justify-content: space-between; font-size: 0.8rem; flex-wrap: wrap; gap: 10px;">
         <span>[ STATUS: ONLINE ]</span>
-        <span>[ ENGINE: NVIDIA NEMOTRON 3.5 ]</span>
+        <span>[ ENGINE: NVIDIA NEMOTRON  ]</span>
         <span>[ WEB INTEL: TAVILY ENGINE ]</span>
     </div>
 </div>
