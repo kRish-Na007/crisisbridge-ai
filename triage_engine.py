@@ -7,14 +7,16 @@ from tavily import TavilyClient
 # Load environment variables
 load_dotenv()
 
-# Configuration
-MOCK_MODE = True  # Set to False once Nebius API credits arrive
+# Set MOCK_MODE = False for live API calls
+MOCK_MODE = False
 
-NEBIUS_API_KEY = os.getenv("NEBIUS_API_KEY", "your_nebius_key")
+# API Credentials
+NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY", "")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "")
 
-NEBIUS_BASE_URL = "https://api.studio.nebius.ai/v1/"
-MODEL_NAME = "nvidia/nemotron-4-340b-instruct"
+# Direct NVIDIA NIM API Configuration
+NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"
+MODEL_NAME = "nvidia/nemotron-3.5-lightning-30b-a3b"
 
 SYSTEM_PROMPT = """You are CrisisBridge AI, an expert real-time disaster emergency triage dispatcher.
 Analyze raw emergency messages and extract structured operational intelligence.
@@ -33,8 +35,7 @@ Respond STRICTLY in valid JSON matching this schema:
 
 def verify_live_hazards(location: str) -> list:
     """Uses Tavily Search API to query real-time road conditions and local hazards."""
-    # Fallback to simulated hazard data if key is missing or default placeholder
-    if not TAVILY_API_KEY or "your_tavily_key" in TAVILY_API_KEY:
+    if not TAVILY_API_KEY or "your_tavily_key" in TAVILY_API_KEY or TAVILY_API_KEY == "":
         return [
             f"Simulated live hazard report for {location}: Major waterlogging on main arterial road.",
             f"Emergency route alert: Emergency services advised to use Northern bypass."
@@ -46,7 +47,6 @@ def verify_live_hazards(location: str) -> list:
         response = tavily.search(query=query, search_depth="basic", max_results=3)
         return [result['content'] for result in response.get('results', [])]
     except Exception as e:
-        # Graceful fallback if API call fails
         return [
             f"Simulated hazard report for {location}: Route flooded near primary bridge access.",
             f"Emergency route alert: Use alternative high-ground access road."
@@ -68,7 +68,10 @@ def analyze_emergency_signal(user_message: str) -> dict:
             "summary": "3 individuals trapped on a rooftop due to rapidly rising floodwaters near Sector 4."
         }
     else:
-        client = OpenAI(base_url=NEBIUS_BASE_URL, api_key=NEBIUS_API_KEY)
+        client = OpenAI(
+            base_url=NVIDIA_BASE_URL,
+            api_key=NVIDIA_API_KEY
+        )
         response = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
