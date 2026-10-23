@@ -43,9 +43,18 @@ def verify_live_hazards(location: str) -> list:
     
     try:
         tavily = TavilyClient(api_key=TAVILY_API_KEY)
-        query = f"current disaster road closure hazard news {location}"
-        response = tavily.search(query=query, search_depth="basic", max_results=3)
-        return [result['content'] for result in response.get('results', [])]
+        # Search specifically for emergency hazard news without the ambiguous word 'current'
+        query = f"{location} disaster flood road closure emergency hazard"
+        response = tavily.search(query=query, topic="news", search_depth="basic", max_results=3)
+        
+        snippets = []
+        for result in response.get('results', []):
+            content = result.get('content', '')
+            # Filter out dictionary or encyclopedia noise
+            if not any(kw in content for kw in ["词典", "百度百科", "英汉", "dictionary", "pronunciation"]):
+                snippets.append(content)
+        
+        return snippets if snippets else [f"No active web hazard alerts flagged for {location}."]
     except Exception as e:
         return [
             f"Simulated hazard report for {location}: Route flooded near primary bridge access.",
